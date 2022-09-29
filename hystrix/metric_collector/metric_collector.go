@@ -43,6 +43,7 @@ type MetricResult struct {
 	Attempts                float64
 	Errors                  float64
 	Successes               float64
+	BadRequests             float64
 	Failures                float64
 	Rejects                 float64
 	ShortCircuits           float64
