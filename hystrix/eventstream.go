@@ -106,6 +106,7 @@ func (sh *StreamHandler) publishMetrics(cb *CircuitBreaker) error {
 		CircuitBreakerOpen: cb.IsOpen(),
 
 		RollingCountSuccess:            uint32(cb.metrics.DefaultCollector().Successes().Sum(now)),
+		RollingCountBadRequests:        uint32(cb.metrics.DefaultCollector().BadRequests().Sum(now)),
 		RollingCountFailure:            uint32(cb.metrics.DefaultCollector().Failures().Sum(now)),
 		RollingCountThreadPoolRejected: uint32(cb.metrics.DefaultCollector().Rejects().Sum(now)),
 		RollingCountShortCircuited:     uint32(cb.metrics.DefaultCollector().ShortCircuits().Sum(now)),
@@ -260,6 +261,7 @@ type streamCmdMetric struct {
 	RollingCountSemaphoreRejected  uint32 `json:"rollingCountSemaphoreRejected"`
 	RollingCountShortCircuited     uint32 `json:"rollingCountShortCircuited"`
 	RollingCountSuccess            uint32 `json:"rollingCountSuccess"`
+	RollingCountBadRequests        uint32 `json:"rollingCountBadRequests"`
 	RollingCountThreadPoolRejected uint32 `json:"rollingCountThreadPoolRejected"`
 	RollingCountTimeout            uint32 `json:"rollingCountTimeout"`
 

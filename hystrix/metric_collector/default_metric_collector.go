@@ -19,6 +19,7 @@ type DefaultMetricCollector struct {
 	errors      *rolling.Number
 
 	successes               *rolling.Number
+	badRequests             *rolling.Number
 	failures                *rolling.Number
 	rejects                 *rolling.Number
 	shortCircuits           *rolling.Number
@@ -58,6 +59,13 @@ func (d *DefaultMetricCollector) Successes() *rolling.Number {
 	d.mutex.RLock()
 	defer d.mutex.RUnlock()
 	return d.successes
+}
+
+// BadRequests returns the rolling number of badRequests
+func (d *DefaultMetricCollector) BadRequests() *rolling.Number {
+	d.mutex.RLock()
+	defer d.mutex.RUnlock()
+	return d.badRequests
 }
 
 // Failures returns the rolling number of failures
@@ -135,6 +143,7 @@ func (d *DefaultMetricCollector) Update(r MetricResult) {
 	d.numRequests.Increment(r.Attempts)
 	d.errors.Increment(r.Errors)
 	d.successes.Increment(r.Successes)
+	d.badRequests.Increment(r.BadRequests)
 	d.failures.Increment(r.Failures)
 	d.rejects.Increment(r.Rejects)
 	d.shortCircuits.Increment(r.ShortCircuits)

@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/afex/hystrix-go/hystrix/metric_collector"
+	metricCollector "github.com/afex/hystrix-go/hystrix/metric_collector"
 	"github.com/afex/hystrix-go/hystrix/rolling"
 )
 
@@ -78,6 +78,8 @@ func (m *metricExchange) IncrementMetrics(wg *sync.WaitGroup, collector metricCo
 	switch update.Types[0] {
 	case "success":
 		r.Successes = 1
+	case "badRequests":
+		r.BadRequests = 1
 	case "failure":
 		r.Failures = 1
 		r.Errors = 1

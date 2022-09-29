@@ -272,6 +272,8 @@ func (c *command) errorWithFallback(ctx context.Context, err error) {
 		eventType = "context_canceled"
 	} else if err == context.DeadlineExceeded {
 		eventType = "context_deadline_exceeded"
+	} else if isBadRequestError(err) {
+		eventType = "badRequests"
 	}
 
 	c.reportEvent(eventType)
