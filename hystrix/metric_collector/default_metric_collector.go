@@ -3,7 +3,7 @@ package metricCollector
 import (
 	"sync"
 
-	"github.com/afex/hystrix-go/hystrix/rolling"
+	"github.com/abba5rangwala/hystrix-go/hystrix/rolling"
 )
 
 // DefaultMetricCollector holds information about the circuit state.
@@ -165,6 +165,7 @@ func (d *DefaultMetricCollector) Reset() {
 	d.numRequests = rolling.NewNumber()
 	d.errors = rolling.NewNumber()
 	d.successes = rolling.NewNumber()
+	d.badRequests = rolling.NewNumber()
 	d.rejects = rolling.NewNumber()
 	d.shortCircuits = rolling.NewNumber()
 	d.failures = rolling.NewNumber()
